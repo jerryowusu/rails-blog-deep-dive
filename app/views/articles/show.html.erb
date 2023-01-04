@@ -1,0 +1,32 @@
+<h1><%= @article.title %></h1>
+
+<p> <%= @article.body %> </p>
+
+<ul>
+  <li>
+    <%= link_to 'Edit Article', edit_article_path(@article) %>
+  </li>
+  <li> 
+    <%= link_to 'Delete', article_path(@article), data: {
+    turbo_method: :delete, 
+    turbo_confirm: "Are you sure you want to delete this article?",
+  } %>
+  </li> 
+</ul>
+
+
+<h2>Add a comment:</h2>
+
+<%= form_with model: [ @article, @article.comments.build ] do |form| %>
+  <p>
+    <%= form.label :commenter %><br>
+    <%= form.text_field :commenter %>
+  </p>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
